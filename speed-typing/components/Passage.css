@@ -1,7 +1,7 @@
 .parent {
     width: 1000px;
     height: 1000px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 100px;
@@ -11,7 +11,7 @@
 .passage-component {
     width: 62.5rem;
     height: 62.5rem;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 100px;
@@ -24,10 +24,6 @@
     text-decoration: underline;
 }
 
-.text-reference {
-    width: 62.5rem;
-    white-space: prewrap;
-}
 
 .monkey-type {
     width: 62.5rem;
@@ -39,6 +35,56 @@
     pointer-events: none;
     display: flex;
     gap: 0px;
+}
+
+.blur {
+    position: absolute;
+    top: 0;
+    width: 62.5rem;
+    height: 30.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: rgba(0, 0, 0, 0.45); */
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+}
+
+.blur-element {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-reference {
+    width: 62.5rem;
+    white-space: prewrap;
+}
+
+.text-original {
+    color: #bbb;
+    /* filter: (blur(6px)); */
+    /* opacity: 0.6px; */
+}
+
+.start-typing {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(23, 125, 255);
+    border-radius: 10px;
+
+    height: 2.5rem;
+    text-align: center;
+    width: 8rem;
+}
+
+.instruction{
+    color: white;
+}
+
+.start-typing:hover{
+    transform: scale(1.01);
 }
 
 .hidden-input {

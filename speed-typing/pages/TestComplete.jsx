@@ -4,6 +4,9 @@ import { useLocation } from "react-router"
 import iconCompleted from '../typing-speed-test-main/assets/images/image.svg'
 import iconRestart from '../typing-speed-test-main/assets/images/icon-restart.svg'
 import { SubHeader } from '../components/SubHeader'
+import patternStar from '../typing-speed-test-main/assets/images/pattern-star-2.svg'
+import starYellow from '../typing-speed-test-main/assets/images/pattern-star-1.svg'
+
 
 export function TestComplete() {
     const location = useLocation()
@@ -24,7 +27,10 @@ export function TestComplete() {
             <SubHeader> </SubHeader>
             <div className="resulsts-page-layout">
                 <div className='test-complete-container'>
-                    <img src={iconCompleted} className="image-icon" alt="icon-completed" draggable={false} />
+                    <div className="images">
+                        <img src={patternStar} alt="patter-star" className='pattern-star' />
+                        <img src={iconCompleted} className="image-icon" alt="icon-completed" draggable={false} />
+                    </div>
                     <div className='test-complete-text'>
                         <h2 className='test-complete-h2'>Test Complete!</h2>
                         <p style={{ color: 'rgb(148, 148, 151)' }}>Solid run. Keep pushing to beat your high score.</p>
@@ -52,6 +58,7 @@ export function TestComplete() {
                     </button>
                 </div>
             </div>
+            <img src={starYellow} alt="yellow-star" className='yellow-star'  />
         </>
     )
 }

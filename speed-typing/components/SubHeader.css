@@ -12,6 +12,7 @@
 }
 
 .logo-large{
+    cursor: pointer;
     height: 2rem;
 }
 

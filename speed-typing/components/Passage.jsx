@@ -33,7 +33,7 @@ export function Passage({
     const [arrOfInput, setArrOfInput] = useState([])
     const [incorrectChars, setIncorrectChars] = useState(0)
     const inputRef = useRef(null)
-
+    const blurRef = useRef(null)
     // COMPARING THE INPUT WITH REFERENCE TEXT// 
 
     useEffect(() => {
@@ -122,6 +122,13 @@ export function Passage({
         inputRef.current.focus()
     }
 
+    const handleStartTest = () => {
+        if (blurRef.current) {
+            blurRef.current.style.display='none'
+            setIsStarted(true)
+        }
+        // change the display to none..
+    }
     return (
         <div className="parent">
 
@@ -138,7 +145,7 @@ export function Passage({
                 wpm={wpm}
                 correctChars={correctChars}
                 setMainTimer={setMainTimer}
-                setTestIsFinished={setTestIsFinished }
+                setTestIsFinished={setTestIsFinished}
             ></Header>
 
             <div className='passage-component' onClick={handleInputFocus}>
@@ -156,7 +163,11 @@ export function Passage({
                     correctChars={correctChars}
                     setMainTimer={setMainTimer}
                 ></Header> */}
+
+                {/* blur effect over the text with the button */}
+
                 <div className="passage-text">
+
                     <div className="text-reference">
                         <p className='text-original'>
                             {text && text.length > 0 &&
@@ -179,6 +190,12 @@ export function Passage({
                                 })
                             }
                         </p>
+                    </div>
+                    <div ref={blurRef} className="blur" onClick={handleStartTest}>
+                        <div className="blur-element">
+                            <button className="start-typing" onClick={handleStartTest}>Start Typing Test</button>
+                            <p className="instruction">Or click text and start typing</p>
+                        </div>
                     </div>
                     <input type="text" className='hidden-input'
                         onChange={handleInput}

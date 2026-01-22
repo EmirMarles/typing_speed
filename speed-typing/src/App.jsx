@@ -33,7 +33,6 @@ function App() {
 
   const [correctChars, setCorrectChars] = useState(0)
 
-
   const navigate = useNavigate()
 
   // saving data to local storage for future access //

@@ -7,7 +7,7 @@ export function HomePage(
     {
         difficulty,
         setDifficulty,
-        mode, 
+        mode,
         setMode,
         personalResults,
         setPersonalResults,
@@ -29,7 +29,10 @@ export function HomePage(
     return (
 
         <div className="app-itself">
-            <SubHeader></SubHeader>
+            <SubHeader
+                testIsFinished={testIsFinished}
+                setTestIsFinished={setTestIsFinished}
+            ></SubHeader>
             {/* <Header
                 difficulty={difficulty}
                 setDifficulty={setDifficulty}
@@ -67,7 +70,7 @@ export function HomePage(
                 mainTimer={mainTimer}
                 setCorrectChars={setCorrectChars}
             ></Passage>
-            
+
 
             <div>
                 <div class="attribution">
