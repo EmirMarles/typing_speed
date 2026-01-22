@@ -1,0 +1,85 @@
+:root {
+    --margin-test-complete: 2rem;
+
+    --padding-top-res-container: 1.5rem;
+}
+
+.resulsts-page-layout {
+    display: flex;
+    justify-content: center;
+    user-select: none;
+}
+
+.test-complete-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    border: 2px solid white;
+    text-align: center;
+    width: 60rem;
+}
+
+.image-icon {
+    margin-top: 1.5rem;
+    width: 4rem;
+    margin-bottom: var(--margin-test-complete);
+    filter: drop-shadow(0 0px 1rem rgb(77, 214, 123));
+}
+
+.test-complete-h2 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.results {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+
+    margin-bottom: var(--margin-test-complete);
+}
+
+.results div {
+    width: 5rem;
+    border: 1px solid grey;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 5px;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    text-align: start;
+}
+
+.results p {
+    margin: 0rem;
+}
+
+.go-again-container {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(18, 18, 18);
+    width: 9rem;
+    height: 3.5rem;
+    cursor: pointer;
+}
+
+.again-icon {
+    color: black;
+}
+
+.test-complete-text {
+    margin-bottom: var(--margin-test-complete);
+}
+
+.results-headers{
+    color : rgb(148, 148, 151)
+}

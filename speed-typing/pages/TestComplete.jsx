@@ -1,0 +1,57 @@
+import './TestComplete.css'
+
+import { useLocation } from "react-router"
+import iconCompleted from '../typing-speed-test-main/assets/images/image.svg'
+import iconRestart from '../typing-speed-test-main/assets/images/icon-restart.svg'
+import { SubHeader } from '../components/SubHeader'
+
+export function TestComplete() {
+    const location = useLocation()
+
+    const state = location.state
+
+    let wpm = 0
+    let accuracy = 0
+    let resObj = 0
+    if (state !== null) {
+        wpm = state.wpm
+        accuracy = state.accuracy
+        resObj = state.res
+    }
+
+    return (
+        <>
+            <SubHeader> </SubHeader>
+            <div className="resulsts-page-layout">
+                <div className='test-complete-container'>
+                    <img src={iconCompleted} className="image-icon" alt="icon-completed" draggable={false} />
+                    <div className='test-complete-text'>
+                        <h2 className='test-complete-h2'>Test Complete!</h2>
+                        <p style={{ color: 'rgb(148, 148, 151)' }}>Solid run. Keep pushing to beat your high score.</p>
+                    </div>
+
+                    <div className="results">
+                        <div className="wpm-result">
+                            <p className="results-headers" >WPM:</p>
+                            <p>{wpm}</p>
+                        </div>
+                        <div className="accuracy-result">
+                            <p className="results-headers">Accuracy:</p>
+                            <p><span style={{ color: 'rgb(214, 77, 91)' }}>{accuracy} %</span></p>
+                        </div>
+                        <div className="chars-correct-inc">
+                            <p className="results-headers" >Characters:</p>
+                            <p>
+                                <span style={{ color: 'rgb(77, 214, 123)' }}>{resObj.corrChar}</span>/
+                                <span style={{ color: 'rgb(214, 77, 91)' }}>{resObj.incorrectChar || 3}</span></p>
+                        </div>
+                    </div>
+                    <button className="go-again-container">
+                        <p className='go-again'>Go Again</p>
+                        <img src={iconRestart} alt="icon-restart" className="again-icon" />
+                    </button>
+                </div>
+            </div>
+        </>
+    )
+}

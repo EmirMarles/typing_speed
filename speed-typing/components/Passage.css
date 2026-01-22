@@ -1,0 +1,57 @@
+.passage-component{
+    width: 1000px;
+    height: 1000px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    color: hsl(240, 1%, 59%);
+    position: relative;
+}
+
+.text-reference:focus{
+    text-decoration: underline;
+}
+
+.text-reference{
+    white-space: prewrap;
+}
+
+.monkey-type{
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: prewrap;
+    color: hsl(140, 63%, 57%);
+    pointer-events: none;
+    display: flex;
+    gap: 0px;
+}
+
+.hidden-input{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hidden-input:hover{
+    background-color: yellow;
+}
+
+.false-text{
+    color: hsl(354, 63%, 57%);
+    /* margin-right: 0px; */
+    /* margin-left: 0px; */
+}
+
+.correct-input{
+    /* margin-right: 0px; */
+    /* margin-left: 0px; */
+    color: hsl(140, 63%, 57%);
+}
+
+.wpm{
+    text-align: center;
+    width: 6rem;
+    overflow-x: visible;
+}

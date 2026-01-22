@@ -1,0 +1,84 @@
+.header-main {
+    font-family: 'Custom';
+    src: url('../typing-speed-test-main/assets/fonts/Sora/Sora-VariableFont_wght.ttf');
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-flow: column;
+    border-bottom: 1px solid grey;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    width: 100%;
+    /*  */
+
+    height: 8.438rem;
+}
+
+.first-component {
+    display: flex;
+    justify-content: space-between;
+    gap: 200px;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.second-component {
+    margin-top: 0px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 30px;
+}
+
+.stats {
+    display: flex;
+}
+
+.diff {
+    display: flex;
+}
+
+p {
+    margin: 10px;
+}
+
+.diff-button {
+    border: 1px solid grey;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.diff-button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.chosen-button {
+    border: 1px solid grey;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.chosen-button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.diff-button-mode {
+    border: 1px solid grey;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.diff-button-mode {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.wpm-header{
+    width: 2rem;
+}
