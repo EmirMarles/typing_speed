@@ -87,7 +87,6 @@ export function Header({
     }
 
     return (
-
         <div className='header-main'>
             <div className="second-component">
                 <div className="stats">

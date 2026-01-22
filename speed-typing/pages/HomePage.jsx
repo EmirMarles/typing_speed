@@ -22,7 +22,8 @@ export function HomePage(
         mainTimer,
         setMainTimer,
         correctChars,
-        setCorrectChars
+        setCorrectChars,
+        record
     }
 ) {
 
@@ -32,6 +33,7 @@ export function HomePage(
             <SubHeader
                 testIsFinished={testIsFinished}
                 setTestIsFinished={setTestIsFinished}
+                record={record}
             ></SubHeader>
             {/* <Header
                 difficulty={difficulty}

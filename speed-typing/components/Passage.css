@@ -16,8 +16,23 @@
     margin-right: auto;
     margin-bottom: 100px;
     color: hsl(240, 1%, 59%);
-    position: relative;
+    /* position: relative; */
     font-size: 1.2rem;
+}
+
+.passage-text{
+    width: 62.5rem;
+    height: 62.5rem;
+    position: relative;
+}
+
+
+.text-reference {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 62.5rem;
+    white-space: prewrap;
 }
 
 .text-reference:focus {
@@ -57,10 +72,6 @@
     align-items: center;
 }
 
-.text-reference {
-    width: 62.5rem;
-    white-space: prewrap;
-}
 
 .text-original {
     color: #bbb;

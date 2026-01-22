@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router'
 import data from '../typing-speed-test-main/data.json'
 import { chooseRandomText } from '../utils/chooseRandomText'
 import { useNavigate } from 'react-router'
+import { compareRecords } from '../utils/algorithms'
 
 function App() {
   const [difficulty, setDifficulty] = useState(() => {
@@ -32,12 +33,12 @@ function App() {
   const [mainTimer, setMainTimer] = useState(60)
 
   const [correctChars, setCorrectChars] = useState(0)
-
+  const [record, setRecord] = useState(() => {
+    const localRecord = localStorage.getItem('record')
+    return localRecord !== null ? JSON.parse(localRecord) : 0
+  })
   const navigate = useNavigate()
 
-  // saving data to local storage for future access //
-
-  // when chaning difficulty - the text on the screen should change
 
   useEffect(() => {
     if (mode === null) return
@@ -49,10 +50,9 @@ function App() {
     localStorage.setItem('difficulty', JSON.stringify(difficulty))
   }, [difficulty])
 
-  // choosing random text when difficulty is chosen
+  // RANDOM TEXT CHOOSING WHEN DIFF IS CHOSEN
 
   useEffect(() => {
-    // every rerender - the text is being chosen again and again
     const setInitialText = () => {
       const text = chooseRandomText(data, difficulty)
       if (text !== null) {
@@ -73,16 +73,27 @@ function App() {
     localStorage.setItem('text', JSON.stringify(text))
   }, [text])
 
+  // CHANGING THE PAGE TO TEST-RESULTS WHEN THE TEST IS FINISHED //
+
   useEffect(() => {
     if (testIsFinished === false) return
-    else navigate('/test-results', {
-      state: {
-        wpm: wpm,
-        accuracy : correctChars,
-        res : personalResults
+    else {
+      const setNewRec = (wpm) => setRecord(wpm)
+      const isNewRecord = compareRecords(record, wpm)
+      if (isNewRecord) {
+        localStorage.setItem('record', JSON.stringify(wpm))
+        setNewRec(wpm)
       }
-    })
-  }, [testIsFinished, navigate, wpm, correctChars, personalResults])
+      navigate('/test-results', {
+        state: {
+          wpm: wpm,
+          accuracy: correctChars,
+          res: personalResults,
+          isNewRecord: isNewRecord
+        }
+      })
+    }
+  }, [record, testIsFinished, navigate, wpm, correctChars, personalResults])
 
   return (
     <Routes>
@@ -105,6 +116,7 @@ function App() {
         setMainTimer={setMainTimer}
         correctChars={correctChars}
         setCorrectChars={setCorrectChars}
+        record={record}
       ></ HomePage>}></Route>
       <Route path="/test-results" element={<TestComplete />}></Route>
     </Routes>

@@ -91,6 +91,19 @@
     cursor: pointer;
 }
 
+.beat-again-container{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(18, 18, 18);
+    width: 9rem;
+    height: 3.5rem;
+    cursor: pointer;
+}
+
 .again-icon {
     color: black;
 }
