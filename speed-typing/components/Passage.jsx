@@ -4,10 +4,30 @@ import { calculateWPM } from '../utils/algorithms'
 import { useRef } from 'react'
 import { compareTextObjects } from '../utils/compareTextObjects'
 import { calculateAccuracy } from '../utils/algorithms'
+import { Header } from './Header'
 
 // RANDOMIZER FOR TEXT SELECTION
 
-export function Passage({ text, setTestIsFinished, setIsStarted, setWpm, mainTimer, setText, setCorrectChars, setPersonalResults }) {
+export function Passage({
+    text,
+    setTestIsFinished,
+    setIsStarted,
+    setWpm,
+    mainTimer,
+    setText,
+    setCorrectChars,
+    setPersonalResults,
+    difficulty,
+    setDifficulty,
+    mode,
+    setMode,
+    personalResults,
+    testIsFinished,
+    isStarted,
+    wpm,
+    correctChars,
+    setMainTimer,
+}) {
 
     const [userInput, setUserInput] = useState(null)
     const [arrOfInput, setArrOfInput] = useState([])
@@ -34,7 +54,7 @@ export function Passage({ text, setTestIsFinished, setIsStarted, setWpm, mainTim
         let newArr = [...arrOfInput]
         let index = newArr.length
         let obj = compareTextObjects(text, userInput)
-        if (obj.correct === false){
+        if (obj.correct === false) {
             setIncorrectChars(incorrectChars + 1)
         }
         newArr[index] = obj
@@ -72,10 +92,10 @@ export function Passage({ text, setTestIsFinished, setIsStarted, setWpm, mainTim
 
     // CALCULATE ACCURACY
 
-    useEffect(()=>{
-        if (userInput === null) return 
+    useEffect(() => {
+        if (userInput === null) return
         console.log('userInput, incorrectChars:', userInput, incorrectChars)
-        console.log('length',userInput.split("").length)
+        console.log('length', userInput.split("").length)
         let percentage = calculateAccuracy(userInput, incorrectChars)
         console.log('accuracy percentage:', percentage)
         setCorrectChars(percentage)
@@ -83,12 +103,12 @@ export function Passage({ text, setTestIsFinished, setIsStarted, setWpm, mainTim
     }, [userInput, setCorrectChars, incorrectChars])
 
     // SETTTING THE RESULTS FOR THE RESULTS PAGE
-    useEffect(()=>{
+    useEffect(() => {
         if (userInput === null) return;
         let totalChar = userInput.split("").length
         let corrChar = totalChar - incorrectChars
         let res = {
-            corrChar : corrChar,
+            corrChar: corrChar,
             incorrectChars: incorrectChars,
         }
         setPersonalResults(res)
@@ -103,36 +123,69 @@ export function Passage({ text, setTestIsFinished, setIsStarted, setWpm, mainTim
     }
 
     return (
-        <div className='passage-component' onClick={handleInputFocus}>
-            <div className="passage-text">
-                <div className="text-reference">
-                    <p className='text-original'>
-                        {text && text.length > 0 &&
-                            text.map((char, index) => {
-                                return <span key={index}>{char}</span>
-                            })
-                        }
-                    </p>
+        <div className="parent">
+
+            <Header
+                difficulty={difficulty}
+                setDifficulty={setDifficulty}
+                mode={mode}
+                setMode={setMode}
+                personalResults={personalResults}
+                setPersonalResults={setPersonalResults}
+                setText={setText}
+                testIsFinished={testIsFinished}
+                isStarted={isStarted}
+                wpm={wpm}
+                correctChars={correctChars}
+                setMainTimer={setMainTimer}
+                setTestIsFinished={setTestIsFinished }
+            ></Header>
+
+            <div className='passage-component' onClick={handleInputFocus}>
+                {/* <Header
+                    difficulty={difficulty}
+                    setDifficulty={setDifficulty}
+                    mode={mode}
+                    setMode={setMode}
+                    personalResults={personalResults}
+                    setPersonalResults={setPersonalResults}
+                    setText={setText}
+                    testIsFinished={testIsFinished}
+                    isStarted={isStarted}
+                    wpm={wpm}
+                    correctChars={correctChars}
+                    setMainTimer={setMainTimer}
+                ></Header> */}
+                <div className="passage-text">
+                    <div className="text-reference">
+                        <p className='text-original'>
+                            {text && text.length > 0 &&
+                                text.map((char, index) => {
+                                    return <span key={index}>{char}</span>
+                                })
+                            }
+                        </p>
+                    </div>
+                    <div className="monkey-type" onChange={handleInput}>
+                        <p>
+                            {arrOfInput.length > 0 &&
+                                arrOfInput.map((elem) => {
+                                    if (elem.correct === true) {
+                                        return (<span className="correct-input" key={elem.id}>{elem.ch}</span>)
+                                    }
+                                    else {
+                                        return (<span className="false-text" key={elem.id} >{elem.ch}</span>)
+                                    }
+                                })
+                            }
+                        </p>
+                    </div>
+                    <input type="text" className='hidden-input'
+                        onChange={handleInput}
+                        autoFocus
+                        ref={inputRef}
+                    />
                 </div>
-                <div className="monkey-type" onChange={handleInput}>
-                    <p>
-                        {arrOfInput.length > 0 &&
-                            arrOfInput.map((elem) => {
-                                if (elem.correct === true) {
-                                    return (<span className="correct-input" key={elem.id}>{elem.ch}</span>)
-                                }
-                                else {
-                                    return (<span className="false-text" key={elem.id} >{elem.ch}</span>)
-                                }
-                            })
-                        }
-                    </p>
-                </div>
-                <input type="text" className='hidden-input'
-                    onChange={handleInput}
-                    autoFocus
-                    ref={inputRef}
-                />
             </div>
         </div>
     )

@@ -19,7 +19,6 @@ export function Header({
 }) {
     const [seconds, setSeconds] = useState(60)
 
-
     // TIMER
     useEffect(() => {
         if (mode === 'passage') return
@@ -90,15 +89,15 @@ export function Header({
     return (
 
         <div className='header-main'>
-
             <div className="second-component">
                 <div className="stats">
+                    {/* if infinity - do something */}
                     <p className='wpm'><span className='wpm-header'>WPM:</span> {wpm}</p>
-                    <p>Accuracy: {correctChars}</p>
-                    <p>Time: {seconds}</p>
+                    <p className='acc'> <span style={{color: 'rgb(148, 148, 151)'}}> Accuracy:</span> {correctChars}</p>
+                    <p className='tim'> <span style={{color: 'rgb(148, 148, 151)'}}> Time:</span> {seconds}</p>
                 </div>
                 <div className="diff">
-                    <p>Difficulty:</p>
+                    <p style={{color: 'rgb(148, 148, 151)'}}>Difficulty:</p>
                     {difficulty === 'easy'
                         ? <p className='chosen-button'
                             onClick={handleSetEasy}
@@ -124,7 +123,7 @@ export function Header({
                         >Hard</p>
                     }
 
-                    <p>Mode:</p>
+                    <p style={{color: 'rgb(148, 148, 151)'}}>Mode:</p>
 
                     {mode === 'timed'
                         ? <p className='diff-button-mode'
