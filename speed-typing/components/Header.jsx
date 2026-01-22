@@ -92,12 +92,29 @@ export function Header({
             <div className="second-component">
                 <div className="stats">
                     {/* if infinity - do something */}
-                    <p className='wpm'><span className='wpm-header'>WPM:</span> {wpm}</p>
-                    <p className='acc'> <span style={{color: 'rgb(148, 148, 151)'}}> Accuracy:</span> {correctChars}</p>
-                    <p className='tim'> <span style={{color: 'rgb(148, 148, 151)'}}> Time:</span> {seconds}</p>
+                    <p className='wpm'>
+                        <span>WPM:</span>
+                        <span className="wpm-header">
+                            {wpm === Infinity
+                                ? 0
+                                : wpm}
+                        </span>
+                    </p>
+                    <p className='acc'>
+                        <span> Accuracy:</span>
+                        <span className='acc-header'>
+                            {correctChars === -Infinity || correctChars === Infinity
+                                ? 0
+                                : correctChars}
+                        </span>
+                    </p>
+                    <p className='tim'>
+                        <span> Time:</span>
+                        <span className='tim-header'>{seconds}</span>
+                    </p>
                 </div>
                 <div className="diff">
-                    <p style={{color: 'rgb(148, 148, 151)'}}>Difficulty:</p>
+                    <p style={{ color: 'rgb(148, 148, 151)' }}>Difficulty:</p>
                     {difficulty === 'easy'
                         ? <p className='chosen-button'
                             onClick={handleSetEasy}
@@ -123,7 +140,7 @@ export function Header({
                         >Hard</p>
                     }
 
-                    <p style={{color: 'rgb(148, 148, 151)'}}>Mode:</p>
+                    <p style={{ color: 'rgb(148, 148, 151)' }}>Mode:</p>
 
                     {mode === 'timed'
                         ? <p className='diff-button-mode'

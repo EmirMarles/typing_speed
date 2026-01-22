@@ -83,10 +83,21 @@ p {
 }
 
 .wpm-header{
-    color: rgb(148, 148, 151);
-    width: 2rem;
+    display: inline-block;
+    width: 2.5rem;
+    /* border: 2px solid red; */
+    /* position: absolute; */
+    /* left: 0; */
 }
 
-.wpm{
+.acc-header{
+    display: inline-block;
+    color: rgb(148, 148, 151);
+    width: 2.5rem;
+}
 
+.tim-header{
+    display: inline-block;
+    color: rgb(148, 148, 151);
+    width: 2rem;
 }
