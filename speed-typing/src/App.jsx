@@ -56,8 +56,8 @@ function App() {
     const setInitialText = () => {
       const text = chooseRandomText(data, difficulty)
       if (text !== null) {
-        let splitText = text.split("")
-        setText(splitText)
+        // let splitText = text.split("")
+        setText(text)
       }
       else {
         let splitText = firstText.split("")

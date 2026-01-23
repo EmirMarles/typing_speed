@@ -13,6 +13,25 @@ function getRandomIndex() {
     return randomIndex
 }
 
+function createArrOfCharObject(text) {
+    if (!text){
+        return null
+    }
+    const splitText = text.split("");
+    let arrOfObjects = []
+    let index = 0
+
+    for (let i = 0; i < splitText.length; i++) {
+        let newObj = {
+            id: i,
+            ch: splitText[i]
+        }
+        arrOfObjects[index] = newObj
+        index++
+    }
+
+    return arrOfObjects
+}
 
 export function chooseRandomText(data, difficulty) {
     let text = null
@@ -30,10 +49,14 @@ export function chooseRandomText(data, difficulty) {
         let randomIndex = getRandomIndex()
         text = arr[randomIndex].text
     }
-    return text
+    let arr = null 
+    if (text) {
+        console.log('creating arr of object')
+        arr = createArrOfCharObject(text)
+    }
+    return arr
 }
 
-
-// const text = chooseRandomText(data)
+// const text = chooseRandomText(data, 'easy')
 
 // console.log(text)

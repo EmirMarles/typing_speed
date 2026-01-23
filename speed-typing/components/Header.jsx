@@ -102,7 +102,7 @@ export function Header({
                     <p className='acc'>
                         <span> Accuracy:</span>
                         <span className='acc-header'>
-                            {correctChars === -Infinity || correctChars === Infinity
+                            {correctChars === -Infinity || correctChars === Infinity || correctChars < 0 || isNaN(correctChars)
                                 ? 0
                                 : correctChars}
                         </span>

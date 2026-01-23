@@ -1,10 +1,11 @@
 import './Passage.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { calculateWPM } from '../utils/algorithms'
 import { useRef } from 'react'
 import { compareTextObjects } from '../utils/compareTextObjects'
 import { calculateAccuracy } from '../utils/algorithms'
 import { Header } from './Header'
+import { restoreReferenceText } from '../utils/compareTextObjects'
 
 // RANDOMIZER FOR TEXT SELECTION
 
@@ -32,34 +33,76 @@ export function Passage({
     const [userInput, setUserInput] = useState(null)
     const [arrOfInput, setArrOfInput] = useState([])
     const [incorrectChars, setIncorrectChars] = useState(0)
+    const [originalText, setOriginalText] = useState(null)
+
     const inputRef = useRef(null)
     const blurRef = useRef(null)
-    // COMPARING THE INPUT WITH REFERENCE TEXT// 
+
+
+    // SAVING THE ORIGINAL FOR FUTURE REFERENCE
+
+    useEffect(() => {
+        if (!text) return
+        const setOriginal = () => {
+            setOriginalText(text)
+        }
+        setOriginal();
+    }, [text])
+
+    // COMPARING TEXT AND INPUT LOGIC// 
 
     useEffect(() => {
         if (userInput === null) return
-        console.log(userInput)
-        let userInputArr = userInput.split("")
+        let newArr = [...arrOfInput]
+        let index = newArr.length
+        let obj = compareTextObjects(text, userInput)
+        // FOR ACCURACY CALCULATION
+        if (obj.correct === false) {
+            let newText = [...text]
+            // newText[obj.id].ch = obj.ch
+            // setText(newText)
+            // we change the value of the reference text?
+            setIncorrectChars(incorrectChars + 1)
+        }
+        newArr[index] = obj
+        setArrOfInput(newArr)
+    }, [userInput, text])
 
+    // DELETING LOGIC 
+
+    useEffect(() => {
+        if (userInput === null) return
+        let userInputArr = userInput.split("")
         const deleteText = () => {
             let index = userInputArr.length
             let newArr = arrOfInput
             newArr.splice(index, Infinity)
             setArrOfInput(newArr)
         }
-        // DELETION LOGIC // 
+        // when deletin - previous char should be put again into the array
         if (userInputArr.length < arrOfInput.length) {
             deleteText();
         }
-        let newArr = [...arrOfInput]
-        let index = newArr.length
-        let obj = compareTextObjects(text, userInput)
-        if (obj.correct === false) {
-            setIncorrectChars(incorrectChars + 1)
+
+    }, [userInput, arrOfInput])
+
+    // TEXT RESTORATION LOGIC //
+
+    useEffect(() => {
+        if (userInput === null) return
+        let userInputArr = userInput.split("")
+        let index = userInputArr.length
+        const restore = () => {
+            let damagedText = [...text]
+            let original = originalText
+            const restoredText = restoreReferenceText(damagedText, index, original)
+            setText(restoredText)
         }
-        newArr[index] = obj
-        setArrOfInput(newArr)
-    }, [userInput, text])
+
+        if (userInputArr.length < arrOfInput.length){
+            restore()
+        }
+    }, [setText, text, originalText, userInput, arrOfInput])
 
     useEffect(() => {
         if (userInput === null) return
@@ -124,10 +167,9 @@ export function Passage({
 
     const handleStartTest = () => {
         if (blurRef.current) {
-            blurRef.current.style.display='none'
+            blurRef.current.style.display = 'none'
             setIsStarted(true)
         }
-        // change the display to none..
     }
     return (
         <div className="parent">
@@ -149,30 +191,17 @@ export function Passage({
             ></Header>
 
             <div className='passage-component' onClick={handleInputFocus}>
-                {/* <Header
-                    difficulty={difficulty}
-                    setDifficulty={setDifficulty}
-                    mode={mode}
-                    setMode={setMode}
-                    personalResults={personalResults}
-                    setPersonalResults={setPersonalResults}
-                    setText={setText}
-                    testIsFinished={testIsFinished}
-                    isStarted={isStarted}
-                    wpm={wpm}
-                    correctChars={correctChars}
-                    setMainTimer={setMainTimer}
-                ></Header> */}
-
-                {/* blur effect over the text with the button */}
 
                 <div className="passage-text">
-
                     <div className="text-reference">
                         <p className='text-original'>
+                            {/* let char objet ={
+                                id : 1
+                                char : "T"
+                            } */}
                             {text && text.length > 0 &&
-                                text.map((char, index) => {
-                                    return <span key={index}>{char}</span>
+                                text.map((obj) => {
+                                    return <span key={obj.id}>{obj.ch}</span>
                                 })
                             }
                         </p>
