@@ -124,7 +124,10 @@ function App() {
         setCorrectChars={setCorrectChars}
         record={record}
       ></ HomePage>}></Route>
-      <Route path="/test-results" element={<TestComplete />}></Route>
+      <Route path="/test-results" element={<TestComplete
+        setTestIsFinished={setTestIsFinished}
+        setIsStarted={setIsStarted}
+      />}></Route>
     </Routes>
   )
 }

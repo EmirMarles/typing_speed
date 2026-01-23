@@ -11,7 +11,10 @@ import newRecordLogo from '../typing-speed-test-main/assets/images/icon-new-pb.s
 import confetti from '../typing-speed-test-main/assets/images/pattern-confetti.svg'
 import { useState, useEffect } from 'react'
 
-export function TestComplete() {
+export function TestComplete({
+    setTestIsFinished,
+    setIsStarted
+}) {
 
     const [playAnimation, setPlayAnimation] = useState(false)
 
@@ -36,8 +39,12 @@ export function TestComplete() {
     const navigate = useNavigate();
 
     const handleGoAgain = () => {
+        setTestIsFinished(false)
+        setIsStarted(false)
         console.log('handle go again clicked')
-        navigate('/')
+        setTimeout(() => {
+            navigate('/')
+        }, 400)
     }
 
     if (isNewRecord) {
@@ -76,9 +83,9 @@ export function TestComplete() {
                         </button>
                     </div>
                     <div className={`confetti`}>
-                        <img src={confetti} 
-                        alt="confetti-image"
-                        className={`confetti-animation ${playAnimation ? 'play' : ''}`}
+                        <img src={confetti}
+                            alt="confetti-image"
+                            className={`confetti-animation ${playAnimation ? 'play' : ''}`}
                         />
                     </div>
                 </div>
@@ -90,7 +97,6 @@ export function TestComplete() {
         return (
             <>
                 <SubHeader> </SubHeader>
-                <button className="remove-record" onClick={() => { localStorage.removeItem('record') }}>Remove record</button>
                 <div className="resulsts-page-layout">
                     <div className='test-complete-container'>
                         <div className="images">

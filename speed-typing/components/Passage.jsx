@@ -6,6 +6,7 @@ import { compareTextObjects } from '../utils/compareTextObjects'
 import { calculateAccuracy } from '../utils/algorithms'
 import { Header } from './Header'
 import { restoreReferenceText } from '../utils/compareTextObjects'
+import { useDebounceWPM, useDebounceAcc } from '../customHooks/useDebounce'
 
 // RANDOMIZER FOR TEXT SELECTION
 
@@ -123,27 +124,40 @@ export function Passage({
 
     // EFFECT TO CALCULATE THE WPM //
 
+    const debouncedWPM = useDebounceWPM(userInput)
+
     useEffect(() => {
-        if (userInput === null) return
-        setTimeout(() => {
-            const wpm = calculateWPM(userInput, mainTimer)
-            console.log('wpm:', wpm)
-            setWpm(wpm)
-        }, 2000)
-        console.log('')
-    }, [userInput, setWpm])
+        let wpmDebounced = calculateWPM(userInput, mainTimer)
+        setWpm(wpmDebounced)
+    }, [debouncedWPM])
+
+    // useEffect(() => {
+    //     if (userInput === null) return
+    //     setTimeout(() => {
+    //         const wpm = calculateWPM(userInput, mainTimer)
+    //         console.log('wpm:', wpm)
+    //         setWpm(wpm)
+    //     }, 2000)
+    //     console.log('')
+    // }, [userInput, setWpm])
 
     // CALCULATE ACCURACY
 
-    useEffect(() => {
-        if (userInput === null) return
-        console.log('userInput, incorrectChars:', userInput, incorrectChars)
-        console.log('length', userInput.split("").length)
-        let percentage = calculateAccuracy(userInput, incorrectChars)
-        console.log('accuracy percentage:', percentage)
-        setCorrectChars(percentage)
+    const debouncedAccuracy = useDebounceAcc(userInput)
 
-    }, [userInput, setCorrectChars, incorrectChars])
+    useEffect(()=>{
+        if (debouncedAccuracy){
+            let percentage = calculateAccuracy(debouncedAccuracy, incorrectChars)
+            setCorrectChars(percentage)
+        }
+    },[debouncedAccuracy])
+    // useEffect(() => {
+    //     if (userInput === null) return
+    //     let percentage = calculateAccuracy(userInput, incorrectChars)
+    //     console.log('accuracy percentage:', percentage)
+    //     setCorrectChars(percentage)
+
+    // }, [userInput, setCorrectChars, incorrectChars])
 
     // SETTTING THE RESULTS FOR THE RESULTS PAGE
     useEffect(() => {
