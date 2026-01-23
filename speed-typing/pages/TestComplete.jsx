@@ -8,8 +8,16 @@ import patternStar from '../typing-speed-test-main/assets/images/pattern-star-2.
 import starYellow from '../typing-speed-test-main/assets/images/pattern-star-1.svg'
 import { useNavigate } from 'react-router'
 import newRecordLogo from '../typing-speed-test-main/assets/images/icon-new-pb.svg'
+import confetti from '../typing-speed-test-main/assets/images/pattern-confetti.svg'
+import { useState, useEffect } from 'react'
 
 export function TestComplete() {
+
+    const [playAnimation, setPlayAnimation] = useState(false)
+
+    useEffect(() => {
+        requestAnimationFrame(() => setPlayAnimation(true))
+    }, [])
     const location = useLocation()
 
     const state = location.state
@@ -19,6 +27,7 @@ export function TestComplete() {
     let resObj = 0
     let isNewRecord = false
     if (state !== null) {
+        console.log('everything:', wpm, accuracy, resObj, isNewRecord)
         wpm = state.wpm
         accuracy = state.accuracy
         resObj = state.res
@@ -66,6 +75,12 @@ export function TestComplete() {
                             <img src={iconRestart} alt="icon-restart" className="again-icon" />
                         </button>
                     </div>
+                    <div className={`confetti`}>
+                        <img src={confetti} 
+                        alt="confetti-image"
+                        className={`confetti-animation ${playAnimation ? 'play' : ''}`}
+                        />
+                    </div>
                 </div>
             </>
         )
@@ -75,6 +90,7 @@ export function TestComplete() {
         return (
             <>
                 <SubHeader> </SubHeader>
+                <button className="remove-record" onClick={() => { localStorage.removeItem('record') }}>Remove record</button>
                 <div className="resulsts-page-layout">
                     <div className='test-complete-container'>
                         <div className="images">

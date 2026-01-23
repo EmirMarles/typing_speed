@@ -37,6 +37,8 @@ function App() {
     const localRecord = localStorage.getItem('record')
     return localRecord !== null ? JSON.parse(localRecord) : 0
   })
+
+  const [isNewRecord, setIsNewRecord] = useState(false)
   const navigate = useNavigate()
 
 
@@ -78,11 +80,15 @@ function App() {
   useEffect(() => {
     if (testIsFinished === false) return
     else {
-      const setNewRec = (wpm) => setRecord(wpm)
-      const isNewRecord = compareRecords(record, wpm)
-      if (isNewRecord) {
+      const setNewRec = (wpm) => {
+        setRecord(wpm)
+      }
+      const isNewRec = compareRecords(record, wpm)
+      if (isNewRec) {
+        console.log('new record')
         localStorage.setItem('record', JSON.stringify(wpm))
         setNewRec(wpm)
+        setIsNewRecord(true)
       }
       navigate('/test-results', {
         state: {

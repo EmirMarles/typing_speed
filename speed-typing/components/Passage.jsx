@@ -99,7 +99,7 @@ export function Passage({
             setText(restoredText)
         }
 
-        if (userInputArr.length < arrOfInput.length){
+        if (userInputArr.length < arrOfInput.length) {
             restore()
         }
     }, [setText, text, originalText, userInput, arrOfInput])
@@ -191,7 +191,6 @@ export function Passage({
             ></Header>
 
             <div className='passage-component' onClick={handleInputFocus}>
-
                 <div className="passage-text">
                     <div className="text-reference">
                         <p className='text-original'>
