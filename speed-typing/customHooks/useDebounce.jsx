@@ -20,11 +20,9 @@ export function useDebounceAcc(value){
     const [localAcc, setLocalAcc] = useState(value)
 
     useEffect(()=>{
-
         const timeOutId = setTimeout(()=>{
             setLocalAcc(value)
         }, 300)
-
         return ()=> clearTimeout(timeOutId)
     },[value])
     return localAcc

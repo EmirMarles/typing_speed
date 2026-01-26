@@ -1,5 +1,5 @@
 import './Passage.css'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import { calculateWPM } from '../utils/algorithms'
 import { useRef } from 'react'
 import { compareTextObjects } from '../utils/compareTextObjects'
@@ -10,32 +10,35 @@ import { useDebounceWPM, useDebounceAcc } from '../customHooks/useDebounce'
 
 // RANDOMIZER FOR TEXT SELECTION
 
-export function Passage({
-    text,
-    setTestIsFinished,
-    setIsStarted,
-    setWpm,
-    mainTimer,
-    setText,
-    setCorrectChars,
-    setPersonalResults,
-    difficulty,
-    setDifficulty,
-    mode,
-    setMode,
-    personalResults,
-    testIsFinished,
-    isStarted,
-    wpm,
-    correctChars,
-    setMainTimer,
-}) {
+export function Passage(
+    {
+        text,
+        setTestIsFinished,
+        setIsStarted,
+        setWpm,
+        mainTimer,
+        setText,
+        setCorrectChars,
+        setPersonalResults,
+        difficulty,
+        setDifficulty,
+        mode,
+        setMode,
+        personalResults,
+        testIsFinished,
+        isStarted,
+        wpm,
+        correctChars,
+        setMainTimer,
+    }) {
 
     const [userInput, setUserInput] = useState(null)
     const [arrOfInput, setArrOfInput] = useState([])
     const [incorrectChars, setIncorrectChars] = useState(0)
     const [originalText, setOriginalText] = useState(null)
 
+    const [visibility, setVisibility] = useState(true)
+    
     const inputRef = useRef(null)
     const blurRef = useRef(null)
 
@@ -110,7 +113,6 @@ export function Passage({
         setIsStarted(true)
     }, [userInput, setIsStarted])
 
-
     // EFFECT TO CHECK IF THE TEXT IS FINISHED
 
     useEffect(() => {
@@ -131,33 +133,16 @@ export function Passage({
         setWpm(wpmDebounced)
     }, [debouncedWPM])
 
-    // useEffect(() => {
-    //     if (userInput === null) return
-    //     setTimeout(() => {
-    //         const wpm = calculateWPM(userInput, mainTimer)
-    //         console.log('wpm:', wpm)
-    //         setWpm(wpm)
-    //     }, 2000)
-    //     console.log('')
-    // }, [userInput, setWpm])
-
     // CALCULATE ACCURACY
 
     const debouncedAccuracy = useDebounceAcc(userInput)
 
-    useEffect(()=>{
-        if (debouncedAccuracy){
+    useEffect(() => {
+        if (debouncedAccuracy) {
             let percentage = calculateAccuracy(debouncedAccuracy, incorrectChars)
             setCorrectChars(percentage)
         }
-    },[debouncedAccuracy])
-    // useEffect(() => {
-    //     if (userInput === null) return
-    //     let percentage = calculateAccuracy(userInput, incorrectChars)
-    //     console.log('accuracy percentage:', percentage)
-    //     setCorrectChars(percentage)
-
-    // }, [userInput, setCorrectChars, incorrectChars])
+    }, [debouncedAccuracy])
 
     // SETTTING THE RESULTS FOR THE RESULTS PAGE
     useEffect(() => {

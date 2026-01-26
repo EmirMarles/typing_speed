@@ -1,0 +1,23 @@
+// Text-wrap for input 
+   // animation for where to type
+
+
+
+
+what did I learn:
+ -more knowledge into useEffect, useState 
+ -more knowledge into custom hooks (useDebounce)
+
+What should I learn -
+ -how to name variables in CSS
+ - useReducer, Redux, Zustand for more complex state management
+
+What was challenging:
+ - CSS animations - confetti
+ - reference and input overlay + hiding the reference text that was already typed
+
+
+
+
+Ultralearning techniques:
+ 

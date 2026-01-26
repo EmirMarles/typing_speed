@@ -45,11 +45,16 @@
     position: absolute;
     top: 0;
     left: 0;
-    white-space: prewrap;
     color: hsl(140, 63%, 57%);
     pointer-events: none;
     display: flex;
     gap: 0px;
+}
+
+.monkey-type p{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 .blur {
