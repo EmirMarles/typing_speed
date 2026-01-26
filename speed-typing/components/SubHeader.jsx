@@ -3,10 +3,9 @@ import logoLarge from '../typing-speed-test-main/assets/images/logo-large.svg'
 import personalBest from '../typing-speed-test-main/assets/images/icon-personal-best.svg'
 import { useNavigate } from 'react-router'
 
-export function SubHeader({ personalResults, testIsFinished, setTestIsFinished, record }) {
+export function SubHeader({ record }) {
     const navigate = useNavigate()
     const handleHomePageNavigate = () => {
-        // console.log('bool:', testIsFinished)
         navigate('/')
     }
 

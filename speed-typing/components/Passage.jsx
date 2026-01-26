@@ -38,9 +38,6 @@ export function Passage(
     const [arrOfInput, setArrOfInput] = useState([])
     const [incorrectChars, setIncorrectChars] = useState(0)
     const [originalText, setOriginalText] = useState(null)
-
-    const [visibility, setVisibility] = useState(true)
-
     const inputRef = useRef(null)
     const blurRef = useRef(null)
 
@@ -62,16 +59,18 @@ export function Passage(
         let newArr = [...arrOfInput]
         let index = newArr.length
         let obj = compareTextObjects(text, userInput)
-        // FOR ACCURACY CALCULATION
-        if (obj.correct === false) {
-            let newText = [...text]
-            // newText[obj.id].ch = obj.ch
-            // setText(newText)
-            // we change the value of the reference text?
+        // COUNTING INCORRECT CHARS //
+        const setIncChars = () => {
             setIncorrectChars(incorrectChars + 1)
         }
+        const setNewArr = (newArr) => {
+            setArrOfInput(newArr)
+        }
+        if (obj.correct === false) {
+            setIncChars();
+        }
         newArr[index] = obj
-        setArrOfInput(newArr)
+        setNewArr(newArr)
     }, [userInput, text])
 
     // DELETING LOGIC 
@@ -85,7 +84,6 @@ export function Passage(
             newArr.splice(index, Infinity)
             setArrOfInput(newArr)
         }
-        // when deletin - previous char should be put again into the array
         if (userInputArr.length < arrOfInput.length) {
             deleteText();
         }
@@ -172,15 +170,9 @@ export function Passage(
         }
     }
 
-    const handleRestart = () =>{
+    const handleRestart = () => {
         window.location.reload()
     }
-    // ADDING BORDER TO THE LAST CHAR GIVEN //
-
-    useEffect(() => {
-        if (arrOfInput.length < 0) return
-
-    }, [arrOfInput])
 
     return (
         <div className="parent">

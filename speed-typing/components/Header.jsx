@@ -1,5 +1,4 @@
 import './Header.css'
-import { calculateWPM } from '../utils/algorithms'
 import { SubHeader } from './SubHeader'
 import { useEffect, useState } from 'react'
 
@@ -8,9 +7,6 @@ export function Header({
     setDifficulty,
     mode,
     setMode,
-    personalResults,
-    setPersonalResults,
-    testIsFinished,
     setTestIsFinished,
     isStarted,
     wpm,
@@ -92,7 +88,6 @@ export function Header({
         <div className='header-main'>
             <div className="second-component">
                 <div className="stats">
-                    {/* if infinity - do something */}
                     <p className='wpm'>
                         <span>WPM:</span>
                         <span className="wpm-header">

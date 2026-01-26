@@ -89,7 +89,6 @@ function App() {
       }
       const isNewRec = compareRecords(record, wpm)
       if (isNewRec) {
-        console.log('new record')
         localStorage.setItem('record', JSON.stringify(wpm))
         setNewRec(wpm)
         setIsNewRecord(true)
