@@ -9,7 +9,6 @@ function getArrayOfChars(arrOfCharObj){
     return newArr
 }
 
-
 export function compareTextObjects(reference, input) {
     if (input.split("").length > reference.length) {
         return null
@@ -49,12 +48,3 @@ export function restoreReferenceText(damagedText, index, original){
     }
     return damagedText
 }
-
-
-// export function restore
-
-const twin = 'The sun rose over the quiet town. Birds sang in the trees as people woke up and started their day. It was going to be a warm and sunny morning.'
-const twin2 = 'The sun rose over the quiet town. Birds sang in the trees as people woke'
-
-
-console.log(compareTextObjects(twin, twin2))

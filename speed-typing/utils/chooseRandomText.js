@@ -1,10 +1,3 @@
-
-// import fs from 'fs';
-
-// const data = JSON.parse(
-//   fs.readFileSync(new URL('../typing-speed-test-main/data.json', import.meta.url))
-// );
-
 function getRandomIndex() {
     let ceil = Math.ceil(9)
     let floor = Math.floor(0)
@@ -51,12 +44,7 @@ export function chooseRandomText(data, difficulty) {
     }
     let arr = null 
     if (text) {
-        console.log('creating arr of object')
         arr = createArrOfCharObject(text)
     }
     return arr
 }
-
-// const text = chooseRandomText(data, 'easy')
-
-// console.log(text)

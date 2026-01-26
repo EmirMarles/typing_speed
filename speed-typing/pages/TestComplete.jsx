@@ -1,7 +1,7 @@
 import './TestComplete.css'
 
 import { useLocation } from "react-router"
-import iconCompleted from '../typing-speed-test-main/assets/images/image.svg'
+import iconCompleted from '../typing-speed-test-main/assets/images/icon-completed.svg'
 import iconRestart from '../typing-speed-test-main/assets/images/icon-restart.svg'
 import { SubHeader } from '../components/SubHeader'
 import patternStar from '../typing-speed-test-main/assets/images/pattern-star-2.svg'

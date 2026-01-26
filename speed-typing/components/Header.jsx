@@ -1,5 +1,4 @@
 import './Header.css'
-import { SubHeader } from './SubHeader'
 import { useEffect, useState } from 'react'
 
 export function Header({
