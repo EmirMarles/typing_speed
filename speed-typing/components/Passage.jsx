@@ -198,7 +198,7 @@ export function Passage(
                 <div className="passage-text">
                     <div className="monkey-type" onChange={handleInput}>
                         <p>
-                            {text && text.length > 0 &&
+                            {Array.isArray(text) &&
                                 text.map((char, index) => {
                                     const typed = arrOfInput[index]
                                     return (
