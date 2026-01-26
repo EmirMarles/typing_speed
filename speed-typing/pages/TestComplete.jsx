@@ -29,19 +29,19 @@ export function TestComplete({
     let accuracy = 0
     let resObj = 0
     let isNewRecord = false
+    let firstTest = true
     if (state !== null) {
-        console.log('everything:', wpm, accuracy, resObj, isNewRecord)
         wpm = state.wpm
         accuracy = state.accuracy
         resObj = state.res
         isNewRecord = state.isNewRecord
+        firstTest = state.firstTest
     }
     const navigate = useNavigate();
 
     const handleGoAgain = () => {
         setTestIsFinished(false)
         setIsStarted(false)
-        console.log('handle go again clicked')
         setTimeout(() => {
             navigate('/')
         }, 400)
@@ -57,8 +57,17 @@ export function TestComplete({
                             <img src={newRecordLogo} className="image-icon" alt="icon-completed" draggable={false} />
                         </div>
                         <div className='test-complete-text'>
-                            <h2 className='test-complete-h2'>Record Smashed!</h2>
-                            <p style={{ color: 'rgb(148, 148, 151)' }}>You are getting faster. That was incredible typing</p>
+                            {firstTest
+                                ? <>
+                                    <h2 className='test-complete-h2'>Baseline Established!</h2>
+                                    <p style={{ color: 'rgb(148, 148, 151)' }}>You’ve set the bar. Now the real challenge begins—time to beat it.</p>
+                                </>
+                                : <>
+                                    <h2 className='test-complete-h2'>Record Smashed!</h2>
+                                    <p style={{ color: 'rgb(148, 148, 151)' }}>You are getting faster. That was incredible typing</p>
+                                </>
+                            }
+
                         </div>
 
                         <div className="results">

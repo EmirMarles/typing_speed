@@ -15,7 +15,8 @@ export function Header({
     isStarted,
     wpm,
     correctChars,
-    setMainTimer
+    setMainTimer,
+    setFirstTest
 }) {
     const [seconds, setSeconds] = useState(60)
 
@@ -24,6 +25,7 @@ export function Header({
         if (mode === 'passage') return
         if (isStarted === false) return
         if (seconds <= 0) {
+            setFirstTest(false)
             setTestIsFinished(true)
             return
         }
@@ -33,7 +35,7 @@ export function Header({
         }, 1000)
 
         return () => clearInterval(intervalId)
-    }, [seconds, isStarted])
+    }, [seconds, isStarted, setFirstTest, setMainTimer, setTestIsFinished, mode])
 
     const handleSetEasy = () => {
         if (isStarted) return

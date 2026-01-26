@@ -30,6 +30,7 @@ export function Passage(
         wpm,
         correctChars,
         setMainTimer,
+        setFirstTest
     }) {
 
     const [userInput, setUserInput] = useState(null)
@@ -38,7 +39,7 @@ export function Passage(
     const [originalText, setOriginalText] = useState(null)
 
     const [visibility, setVisibility] = useState(true)
-    
+
     const inputRef = useRef(null)
     const blurRef = useRef(null)
 
@@ -117,12 +118,11 @@ export function Passage(
 
     useEffect(() => {
         if (arrOfInput.length < 0) return
-        // const arr = text.split("")
         if (arrOfInput.length === text.length) {
-            console.log('finished the test!')
+            setFirstTest(false)
             setTestIsFinished(true)
         }
-    }, [arrOfInput, setTestIsFinished, text.length])
+    }, [arrOfInput, setTestIsFinished, text.length, setFirstTest])
 
     // EFFECT TO CALCULATE THE WPM //
 
@@ -170,6 +170,14 @@ export function Passage(
             setIsStarted(true)
         }
     }
+
+    // ADDING BORDER TO THE LAST CHAR GIVEN //
+
+    useEffect(() => {
+        if (arrOfInput.length < 0) return
+
+    }, [arrOfInput])
+
     return (
         <div className="parent">
 
@@ -187,35 +195,34 @@ export function Passage(
                 correctChars={correctChars}
                 setMainTimer={setMainTimer}
                 setTestIsFinished={setTestIsFinished}
+                setFirstTest={setFirstTest}
             ></Header>
 
             <div className='passage-component' onClick={handleInputFocus}>
                 <div className="passage-text">
-                    <div className="text-reference">
-                        <p className='text-original'>
-                            {/* let char objet ={
-                                id : 1
-                                char : "T"
-                            } */}
-                            {text && text.length > 0 &&
-                                text.map((obj) => {
-                                    return <span key={obj.id}>{obj.ch}</span>
-                                })
-                            }
-                        </p>
-                    </div>
                     <div className="monkey-type" onChange={handleInput}>
                         <p>
-                            {arrOfInput.length > 0 &&
-                                arrOfInput.map((elem) => {
-                                    if (elem.correct === true) {
-                                        return (<span className="correct-input" key={elem.id}>{elem.ch}</span>)
-                                    }
-                                    else {
-                                        return (<span className="false-text" key={elem.id} >{elem.ch}</span>)
-                                    }
+                            {text && text.length > 0 &&
+                                text.map((char, index) => {
+                                    const typed = arrOfInput[index]
+                                    return (
+                                        <span key={index}>
+                                            {typed ? (
+                                                <span className={typed.correct ? 'correct-input' : 'false-text'}>
+                                                    {typed.ch}
+                                                </span>
+                                            )
+                                                : (
+                                                    <span className='text-original'>{char.ch}</span>
+                                                )
+                                            }
+                                            {index === arrOfInput.length &&
+                                                (<span className='blinking-line'></span>)
+                                            }
+                                        </span>)
                                 })
                             }
+                            {/* <span className='blinking-line'></span> */}
                         </p>
                     </div>
                     <div ref={blurRef} className="blur" onClick={handleStartTest}>

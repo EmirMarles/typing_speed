@@ -39,6 +39,10 @@ function App() {
   })
 
   const [isNewRecord, setIsNewRecord] = useState(false)
+  const [firstTest, setFirstTest] = useState(() => {
+    const bool = localStorage.getItem('firstTimeBool')
+    return bool !== null ? JSON.parse(bool) : true
+  })
   const navigate = useNavigate()
 
 
@@ -95,11 +99,17 @@ function App() {
           wpm: wpm,
           accuracy: correctChars,
           res: personalResults,
-          isNewRecord: isNewRecord
+          isNewRecord: isNewRecord,
+          firstTest: firstTest
         }
       })
     }
   }, [record, testIsFinished, navigate, wpm, correctChars, personalResults])
+
+  // memorizing that the test is not the first
+  useEffect(()=>{
+    localStorage.setItem('firstTimeBool', JSON.stringify(firstTest))
+  }, [firstTest])
 
   return (
     <Routes>
@@ -123,6 +133,7 @@ function App() {
         correctChars={correctChars}
         setCorrectChars={setCorrectChars}
         record={record}
+        setFirstTest={setFirstTest}
       ></ HomePage>}></Route>
       <Route path="/test-results" element={<TestComplete
         setTestIsFinished={setTestIsFinished}

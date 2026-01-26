@@ -16,7 +16,7 @@ export function SubHeader({ personalResults, testIsFinished, setTestIsFinished, 
                 <img src={logoLarge} alt="logo large" className="logo-large" />
             </div>
             <div className='personal-best'>
-                {record === 0
+                {record === 0 || record == Infinity
                     ? <p> <img src={personalBest} alt="" /><span style={{ color: 'rgb(148, 148, 151)' }}>Personal best:</span> 0</p>
                     : <p> <img src={personalBest} alt="" /><span style={{ color: 'rgb(148, 148, 151)' }}>Personal best:</span> {record}  WPM</p>
                 }

@@ -23,7 +23,8 @@ export function HomePage(
         setMainTimer,
         correctChars,
         setCorrectChars,
-        record
+        record,
+        setFirstTest
     }
 ) {
 
@@ -35,22 +36,6 @@ export function HomePage(
                 setTestIsFinished={setTestIsFinished}
                 record={record}
             ></SubHeader>
-            {/* <Header
-                difficulty={difficulty}
-                setDifficulty={setDifficulty}
-                mode={mode}
-                setMode={setMode}
-                personalResults={personalResults}
-                setPersonalResults={setPersonalResults}
-                setText={setText}
-                testIsFinished={testIsFinished}
-                setTestIsFinished={setTestIsFinished}
-                isStarted={isStarted}
-                wpm={wpm}
-                correctChars={correctChars}
-                setMainTimer={setMainTimer}
-            > </Header> */}
-
             <Passage
                 difficulty={difficulty}
                 setDifficulty={setDifficulty}
@@ -71,6 +56,7 @@ export function HomePage(
                 setWpm={setWpm}
                 mainTimer={mainTimer}
                 setCorrectChars={setCorrectChars}
+                setFirstTest={setFirstTest}
             ></Passage>
 
 
