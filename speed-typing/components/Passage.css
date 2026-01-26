@@ -1,6 +1,6 @@
 .parent {
     width: 1000px;
-    height: 1000px;
+    height: 40rem;
     /* border: 1px solid black; */
     margin-left: auto;
     margin-right: auto;
@@ -10,20 +10,22 @@
 
 .passage-component {
     width: 62.5rem;
-    height: 62.5rem;
-    /* border: 1px solid black; */
+    height: 40.5rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 100px;
     color: hsl(240, 1%, 59%);
-    /* position: relative; */
     font-size: 1.2rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 
 .passage-text{
     width: 62.5rem;
-    height: 62.5rem;
+    height: 25rem;
     position: relative;
+    border-bottom: 1px solid grey;
 }
 
 .monkey-type {
@@ -113,6 +115,25 @@
     text-align: center;
     width: 6rem;
     overflow-x: visible;
+}
+
+.restart-container{
+    margin-top: 0.5rem;
+}
+.restart{
+    font-size: 0.9rem;
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.5rem;
+    background-color: rgb(38,38,38);
+    border-radius: 10px;
+    padding: 0.5rem;
+    align-self: center;
+}
+
+.restart img{
+    width: 1rem;
 }
 
 @keyframes blink {

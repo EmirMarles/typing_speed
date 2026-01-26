@@ -1,7 +1,6 @@
-import { Header } from "../components/Header"
-// import { data } from "../typing-speed-test-main/data.json"
 import { Passage } from "../components/Passage"
 import { SubHeader } from "../components/SubHeader"
+import './HomePage.css'
 
 export function HomePage(
     {
@@ -30,7 +29,7 @@ export function HomePage(
 
     return (
 
-        <div className="app-itself">
+        <div className="typing-app">
             <SubHeader
                 testIsFinished={testIsFinished}
                 setTestIsFinished={setTestIsFinished}
@@ -63,7 +62,7 @@ export function HomePage(
             <div>
                 <div class="attribution">
                     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
-                    Coded by <a href="#">Emir Marles</a>.
+                    Coded by <a href="https://github.com/EmirMarles">Emir Marles</a>.
                 </div>
             </div>
         </div>

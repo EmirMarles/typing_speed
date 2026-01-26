@@ -7,6 +7,7 @@ import { calculateAccuracy } from '../utils/algorithms'
 import { Header } from './Header'
 import { restoreReferenceText } from '../utils/compareTextObjects'
 import { useDebounceWPM, useDebounceAcc } from '../customHooks/useDebounce'
+import restartIcon from '../typing-speed-test-main/assets/images/icon-restart.svg'
 
 // RANDOMIZER FOR TEXT SELECTION
 
@@ -171,6 +172,9 @@ export function Passage(
         }
     }
 
+    const handleRestart = () =>{
+        window.location.reload()
+    }
     // ADDING BORDER TO THE LAST CHAR GIVEN //
 
     useEffect(() => {
@@ -222,9 +226,9 @@ export function Passage(
                                         </span>)
                                 })
                             }
-                            {/* <span className='blinking-line'></span> */}
                         </p>
                     </div>
+
                     <div ref={blurRef} className="blur" onClick={handleStartTest}>
                         <div className="blur-element">
                             <button className="start-typing" onClick={handleStartTest}>Start Typing Test</button>
@@ -236,6 +240,9 @@ export function Passage(
                         autoFocus
                         ref={inputRef}
                     />
+                </div>
+                <div className='restart-container'>
+                    <button onClick={handleRestart} className="restart"><span>Restart Test</span> <img src={restartIcon} alt="restart-icon" /></button>
                 </div>
             </div>
         </div>
